@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="orderViewModel"
+            type="com.neopix.test.orders.viewmodel.OrderViewModel" />
+
+        <variable
+            name="order"
+            type="com.neopix.test.orders.service.model.Order" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/item_details_background"
+        android:orientation="vertical">
+
+        <!-- row 1 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_horizontal_margin"
+            android:background="@color/item_details_background"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+
+                <ImageButton
+                    android:id="@+id/button_close"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="start|center"
+                    android:background="@drawable/ic_close_white"
+                    android:onClick="closeDetailsFragment" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/order_logo"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_orders_total_ammount" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="center"
+                        android:onClick="showBottomFragment"
+                        android:text="@{String.format(@string/date, orderViewModel.order.venue.name)}"
+                        android:textColor="@color/list_item_color"
+                        android:textSize="@dimen/details_title"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_chevron_right" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_more_dots" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="4"
+                    android:background="@color/list_item_color" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/accepted"
+                    android:gravity="center"
+                    android:onClick="showBottomFragment"
+                    android:text="@{String.format(@string/date, orderViewModel.order.status).toUpperCase().replace('_',' ')}"
+                    android:textColor="@color/list_item_color"
+                    android:textSize="@dimen/order_text"
+                    android:textStyle="bold" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="4"
+                    android:background="@color/list_item_color" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!-- row 1 end -->
+
+
+        <!-- row 2 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="3">
+
+            <!-- col 1 -->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="@string/order_number"
+                    android:textColor="@color/details_fragment_light"
+                    android:textSize="@dimen/order_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="@{String.format(@string/date, orderViewModel.order.orderNumber)}"
+                    android:textColor="@color/list_item_color"
+                    android:textSize="@dimen/order_header2"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <!-- col 1 end -->
+            <!-- col 2 -->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/requested_on"
+                    android:textColor="@color/details_fragment_light"
+                    android:textSize="@dimen/order_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.format(@string/date, orderViewModel.order.orderedAt).substring(0, 4).toUpperCase()}"
+                    android:textColor="@color/list_item_color"
+                    android:textSize="@dimen/order_header2"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <!-- col 2 end -->
+            <!-- col 3 -->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="8dp"
+                    android:text="@string/accepted_on"
+                    android:textColor="@color/details_fragment_light"
+                    android:textSize="@dimen/order_text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="8dp"
+                    android:text="@{String.format(@string/date, orderViewModel.order.acceptedAt).substring(0, 4).toUpperCase()}"
+                    android:textColor="@color/list_item_color"
+                    android:textSize="@dimen/order_header2"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- col 3 end -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            app:visibleGone="@{!isLoading}">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:background="@color/details_fragment_light"
+                app:tabIndicatorColor="@color/colorAccepted"
+                app:tabIndicatorHeight="4dp"
+                app:tabPaddingEnd="5dp"
+                app:tabPaddingStart="5dp"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@color/item_border_color">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabChats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/included_products"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/notes"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/list_item_color"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:textColor="@color/details_fragment_light">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="17dp"
+                    android:layout_marginBottom="17dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/total_amount_bottom"
+                        android:textColor="@color/details_fragment_light"
+                        android:textSize="@dimen/dialog_text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/sample_total_amount"
+                        android:textColor="@color/item_dark_background"
+                        android:textSize="@dimen/details_title"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginEnd="17dp"
+                    android:background="@drawable/partially_accepted"
+                    android:onClick="closeDetailsFragment"
+                    android:text="@string/accept_order"
+                    android:textColor="@color/list_item_color"
+                    android:textSize="@dimen/dialog_text"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>
