@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="order"
             type="com.neopix.test.orders.service.model.Order" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/item_horizontal_margin"
-        android:orientation="horizontal"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/item_light_background"
-        app:cardUseCompatPadding="true">
+        android:layout_height="25dp"
+        android:background="@color/item_light_background"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="23dp"
+            android:foregroundGravity="bottom"
+            android:src="@drawable/ic_orders_section_dot" />
+
+        <TextView
+            android:id="@+id/orderDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/item_horizontal_margin"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="49dp"
-                android:layout_height="30dp"
-                android:src="@drawable/dotted_line_header"
-                android:layout_marginStart="3dp"
-                android:layout_gravity="center_vertical"/>
-
-            <TextView
-                android:id="@+id/orderDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:contentDescription="@string/order_watchers"
-                android:text="@{String.format(@string/date, order.orderedAt).substring(4, 8).toUpperCase().concat(String.format(@string/date, order.orderedAt).substring(String.format(@string/date, order.orderedAt).length() - 4))}"
-                android:textSize="@dimen/order_text" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+            android:layout_gravity="bottom"
+            android:layout_marginStart="7dp"
+            android:fontFamily="@font/neopix_font_medium"
+            android:text="@{String.format(@string/date, order.orderedAt).substring(0, 10).toUpperCase()}"
+            android:textColor="@color/item_date_header"
+            android:textSize="@dimen/order_text"
+            android:textStyle="bold" />
+    </LinearLayout>
 </layout>
+
+
+

@@ -1,84 +1,76 @@
 package com.neopix.test.orders.view.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.neopix.test.orders.R;
-import com.neopix.test.orders.databinding.FragmentIncludedProductsBinding;
+import com.neopix.test.orders.databinding.OrderedProductItemBinding;
+import com.neopix.test.orders.service.model.Order;
 import com.neopix.test.orders.service.model.OrderedProducts;
+import com.neopix.test.orders.view.callback.OrderClickCallback;
 
 import java.util.ArrayList;
 
 public class OrderedProductsAdapter extends RecyclerView.Adapter<OrderedProductsAdapter.ViewHolder> {
-  private ArrayList<OrderedProducts> orderedProductsList;
 
-  public void setOrderedProductsList(ArrayList<OrderedProducts> orderedProductsList) {
-    if (this.orderedProductsList == null) {
-      this.orderedProductsList = orderedProductsList;
-      notifyItemRangeInserted(0, orderedProductsList.size());
-    } else {
-      DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
-        @Override
-        public int getOldListSize() {
-          return OrderedProductsAdapter.this.orderedProductsList.size();
-        }
+  private ArrayList<OrderedProducts> orderedProducts;
+  private Context context;
+  private OrderedProductItemBinding orderedProductsBinding;
 
-        @Override
-        public int getNewListSize() {
-          return orderedProductsList.size();
-        }
-
-        @Override
-        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-          return OrderedProductsAdapter.this.orderedProductsList.get(oldItemPosition).id ==
-            orderedProductsList.get(newItemPosition).id;
-        }
-
-        @Override
-        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-          OrderedProducts order = orderedProductsList.get(newItemPosition);
-          OrderedProducts old = orderedProductsList.get(oldItemPosition);
-          return order.id == old.id;
-        }
-      });
-      this.orderedProductsList = orderedProductsList;
-      result.dispatchUpdatesTo(this);
-    }
+  public OrderedProductsAdapter(Context ctx) {
+    context = ctx;
   }
 
-  public class ViewHolder extends RecyclerView.ViewHolder {
-    FragmentIncludedProductsBinding binding;
-
-    public ViewHolder(FragmentIncludedProductsBinding binding) {
-      super(binding.getRoot());
-      this.binding = binding;
+  public void setOrderedProductsList(Context context, final ArrayList<OrderedProducts> orderedProductsList) {
+    this.context = context;
+    if (this.orderedProducts == null) {
+      this.orderedProducts = orderedProductsList;
+      notifyItemRangeInserted(0, orderedProducts.size());
     }
   }
 
   @Override
-  public OrderedProductsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    FragmentIncludedProductsBinding binding = DataBindingUtil
-      .inflate(LayoutInflater.from(parent.getContext()), R.layout.order_main_list_item,
-        parent, false);
-    return new OrderedProductsAdapter.ViewHolder(binding);
+  public OrderedProductsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                              int viewType) {
+    orderedProductsBinding = DataBindingUtil.inflate(
+      LayoutInflater.from(parent.getContext()),
+      R.layout.ordered_product_item, parent, false);
+
+    return new ViewHolder(orderedProductsBinding);
   }
 
   @Override
-  public void onBindViewHolder(OrderedProductsAdapter.ViewHolder viewHolder, int position) {
-
-    OrderedProductsAdapter.ViewHolder headerViewHolder = viewHolder;
-
-    headerViewHolder.binding.setIsLoading(false);
-    headerViewHolder.binding.executePendingBindings();
-
+  public void onBindViewHolder(ViewHolder holder, int position) {
+    OrderedProducts dataModel = orderedProducts.get(position);
+    holder.binding.setOrderedProducts(dataModel);
+    holder.binding.executePendingBindings();
   }
 
   @Override
   public int getItemCount() {
-    return orderedProductsList == null ? 0 : orderedProductsList.size();
+    return this.orderedProducts.size();
+  }
+
+  public class ViewHolder extends RecyclerView.ViewHolder {
+    public OrderedProductItemBinding binding;
+
+    public ViewHolder(OrderedProductItemBinding binding) {
+      super(binding.getRoot());
+      this.binding = binding;
+    }
+
+    public void bind(Object obj) {
+      binding.setVariable(0, obj);
+      binding.executePendingBindings();
+    }
   }
 }
+
+

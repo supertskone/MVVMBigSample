@@ -25,6 +25,7 @@ import com.neopix.test.orders.di.Injectable;
 import com.neopix.test.orders.service.model.Order;
 import com.neopix.test.orders.service.model.Orders;
 import com.neopix.test.orders.view.adapter.OrderAdapter;
+import com.neopix.test.orders.view.adapter.OrderPagedAdapter;
 import com.neopix.test.orders.view.callback.OrderClickCallback;
 import com.neopix.test.orders.viewmodel.OrderListViewModel;
 
@@ -34,9 +35,11 @@ import static com.neopix.test.orders.R.layout.fragment_main_order_list;
 
 public class OrderListFragment extends Fragment implements Injectable {
   public static final String TAG = "OrderListFragment";
-  private OrderAdapter orderAdapter;
+  private OrderPagedAdapter orderAdapter;
   private FragmentMainOrderListBinding binding;
   private LinearLayoutManager layoutManager;
+  private HeaderItemDecoration headerItemDecoration;
+
   @Inject
   ViewModelProvider.Factory viewModelFactory;
 
@@ -47,10 +50,13 @@ public class OrderListFragment extends Fragment implements Injectable {
                            @Nullable Bundle savedInstanceState) {
     binding = DataBindingUtil.inflate(inflater, fragment_main_order_list, container, false);
 
-    orderAdapter = new OrderAdapter(orderClickCallback);
+    orderAdapter = new OrderPagedAdapter(orderClickCallback, getContext());
+    headerItemDecoration = new HeaderItemDecoration(orderAdapter);
+
     layoutManager = new LinearLayoutManager(getContext());
     binding.orderList.setLayoutManager(layoutManager);
     binding.orderList.setAdapter(orderAdapter);
+    binding.orderList.addItemDecoration(headerItemDecoration);
     binding.setIsLoading(true);
     changeStatusBarColor();
 
@@ -76,10 +82,11 @@ public class OrderListFragment extends Fragment implements Injectable {
 
   private void observeViewModel(OrderListViewModel viewModel) {
     // Update the list when the data changes
-    viewModel.getOrderListObservable().observe(this, orders -> {
+    viewModel.itemPagedList.observe(this, orders -> {
       if (orders != null) {
         binding.setIsLoading(false);
         orderAdapter.setOrderList(getContext(), orders);
+        orderAdapter.submitList(orders);
       }
     });
   }

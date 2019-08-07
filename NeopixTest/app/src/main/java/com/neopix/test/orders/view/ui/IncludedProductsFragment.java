@@ -10,50 +10,65 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.neopix.test.orders.R;
+import com.neopix.test.orders.databinding.FragmentIncludedProductsBinding;
 import com.neopix.test.orders.service.model.Order;
 import com.neopix.test.orders.service.model.OrderDetails;
+import com.neopix.test.orders.service.model.OrderedProducts;
+import com.neopix.test.orders.service.model.Venue;
+import com.neopix.test.orders.view.adapter.OrderPagedAdapter;
+import com.neopix.test.orders.view.adapter.OrderedProductsAdapter;
 
-public class IncludedProductsFragment extends Fragment implements MainActivity.OnOrderDataReceivedListener {
-    public Order order;
-    public MainActivity mActivity;
+import java.util.ArrayList;
+import java.util.List;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mActivity = (MainActivity) getActivity();
-        mActivity.setOrderDataListener(this);
-        order = mActivity.order.data;
-    }
+import static android.widget.LinearLayout.VERTICAL;
 
+public class IncludedProductsFragment extends Fragment implements OrderFragment.DisplayOrderedProducts {
+  public MutableLiveData<ArrayList<OrderedProducts>> orderedProducts = new MutableLiveData<>();
+  public FragmentIncludedProductsBinding binding;
+  public OrderedProductsAdapter orderedProductsAdapter;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+  public IncludedProductsFragment(ArrayList<OrderedProducts> orderedProducts) {
+    this.orderedProducts.setValue(orderedProducts);
+  }
 
-        setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_included_products, container, false);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+  }
 
-    }
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_chats, menu);
-    }
+    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_included_products, container, false);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_chat) {
-            Toast.makeText(getActivity(), "Clicked on " + item.getTitle(), Toast.LENGTH_SHORT)
-                    .show();
-        }
-        return true;
-    }
+    if (orderedProducts.getValue() != null) {
 
-    @Override
-    public void onDataReceived(OrderDetails order) {
+      orderedProductsAdapter = new OrderedProductsAdapter(getContext());
+      orderedProductsAdapter.setOrderedProductsList(getContext(), this.orderedProducts.getValue());
+      binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+      binding.recyclerView.setHasFixedSize(true);
+      binding.recyclerView.setAdapter(orderedProductsAdapter);
 
     }
+    return binding.getRoot();
+
+  }
+
+  protected void displayReceivedData(ArrayList<OrderedProducts> orderedProducts) {
+    this.orderedProducts.setValue(orderedProducts);
+  }
+
+  @Override
+  public void sendOrderedProducts(ArrayList<OrderedProducts> orderedProducts) {
+    this.orderedProducts.setValue(orderedProducts);
+  }
+
 }

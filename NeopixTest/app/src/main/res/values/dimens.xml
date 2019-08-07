@@ -1,12 +1,15 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="item_horizontal_margin">8dp</dimen>
+    <dimen name="item_horizontal_margin">10dp</dimen>
+    <dimen name="item_End_margin">12dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="order_header1">33sp</dimen>
     <dimen name="order_header2">19sp</dimen>
     <dimen name="title_text">10sp</dimen>
+    <dimen name="status_text">9sp</dimen>
     <dimen name="dialog_text">15sp</dimen>
+    <dimen name="item_title_text">15sp</dimen>
     <dimen name="details_title">21sp</dimen>
     <dimen name="title_text_large">25sp</dimen>
     <dimen name="order_text">12sp</dimen>

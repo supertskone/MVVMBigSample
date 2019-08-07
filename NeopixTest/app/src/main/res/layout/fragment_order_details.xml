@@ -70,6 +70,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
+                        android:fontFamily="@font/neopix_font"
                         android:gravity="center"
                         android:onClick="showBottomFragment"
                         android:text="@{String.format(@string/date, orderViewModel.order.venue.name)}"
@@ -89,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:layout_weight="1"
+                    android:layout_marginStart="5dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_more_dots" />
 
@@ -157,6 +159,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:paddingLeft="8dp"
                     android:text="@string/order_number"
                     android:textColor="@color/details_fragment_light"
@@ -166,6 +169,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:paddingLeft="8dp"
                     android:text="@{String.format(@string/date, orderViewModel.order.orderNumber)}"
                     android:textColor="@color/list_item_color"
@@ -185,6 +189,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:text="@string/requested_on"
                     android:textColor="@color/details_fragment_light"
                     android:textSize="@dimen/order_text"
@@ -193,6 +198,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:text="@{String.format(@string/date, orderViewModel.order.orderedAt).substring(0, 4).toUpperCase()}"
                     android:textColor="@color/list_item_color"
                     android:textSize="@dimen/order_header2"
@@ -211,6 +217,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:paddingEnd="8dp"
                     android:text="@string/accepted_on"
                     android:textColor="@color/details_fragment_light"
@@ -220,6 +227,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:paddingEnd="8dp"
                     android:text="@{String.format(@string/date, orderViewModel.order.acceptedAt).substring(0, 4).toUpperCase()}"
                     android:textColor="@color/list_item_color"
@@ -255,6 +263,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:text="@string/included_products"
                     android:textStyle="bold" />
 
@@ -263,6 +272,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:text="@string/notes"
                     android:textStyle="bold" />
 
@@ -281,6 +291,10 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:textColor="@color/details_fragment_light">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/item_date_header" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -295,6 +309,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:fontFamily="@font/neopix_font_medium"
                         android:gravity="start"
                         android:text="@string/total_amount_bottom"
                         android:textColor="@color/details_fragment_light"
@@ -306,6 +321,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
+                        android:fontFamily="@font/neopix_font_medium"
                         android:text="@string/sample_total_amount"
                         android:textColor="@color/item_dark_background"
                         android:textSize="@dimen/details_title"
@@ -321,6 +337,7 @@
                     android:background="@drawable/partially_accepted"
                     android:onClick="closeDetailsFragment"
                     android:text="@string/accept_order"
+                    android:fontFamily="@font/neopix_font"
                     android:textColor="@color/list_item_color"
                     android:textSize="@dimen/dialog_text"
                     android:textStyle="bold" />

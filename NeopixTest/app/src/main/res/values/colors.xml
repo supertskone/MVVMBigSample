@@ -4,10 +4,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorAccepted">#4CAF50</color>
+    <color name="colorAccepted">#3BBD8E</color>
     <color name="item_dark_background">#000000</color>
     <color name="item_details_background">#2A2D48</color>
-    <color name="item_light_background">#F0F0F0</color>
+    <!--color name="item_light_background">#F0F0F0</color-->
+    <color name="item_light_background">#ECEEF0</color>
+    <color name="item_date_header">#8790a3</color>
     <color name="item_border_color">#C9C9C9</color>
     <color name="list_item_color">#FFFFFF</color>
     <color name="details_fragment_light">#545784</color>

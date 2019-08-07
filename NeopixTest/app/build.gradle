@@ -54,6 +54,7 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$project.arch"
     implementation "androidx.lifecycle:lifecycle-runtime:$project.arch"
     implementation "androidx.lifecycle:lifecycle-extensions:$project.arch"
+    implementation 'android.arch.paging:runtime:1.0.1'
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$project.retrofit"
@@ -75,6 +76,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.7"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.saber:stickyheader:1.0'
+
     testImplementation 'junit:junit:4.12'
 }
 repositories {

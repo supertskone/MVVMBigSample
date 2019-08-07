@@ -52,7 +52,6 @@ public class OrderViewModel extends AndroidViewModel {
     }
 
     public void setOrder(Order order) {
-
         this.order.set(order);
     }
 

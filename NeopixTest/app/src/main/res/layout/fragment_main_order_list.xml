@@ -30,6 +30,7 @@
                 android:layout_marginStart="@dimen/fab_margin"
                 android:layout_marginTop="@dimen/title_margin"
                 android:layout_toLeftOf="@id/image"
+                android:fontFamily="@font/neopix_font"
                 android:text="@string/orders_main_list"
                 android:textAlignment="viewStart"
                 android:textColor="@color/item_dark_background"
@@ -51,9 +52,9 @@
                 android:layout_marginStart="@dimen/item_horizontal_margin"
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="@dimen/item_horizontal_margin"
+                android:backgroundTint="@color/item_light_background"
                 android:orientation="horizontal"
                 app:cardElevation="0dp"
-                android:backgroundTint="@color/item_light_background"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -83,19 +84,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/order_language"
+                            android:fontFamily="@font/neopix_font_medium"
                             android:text="@string/total_amount"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/title_text" />
+                            android:textSize="@dimen/title_text"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/orderDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/order_watchers"
-                            android:text="$34,194.80"
+                            android:fontFamily="@font/neopix_font"
+
+                            android:text="@string/total_amount_title"
                             android:textColor="@color/item_dark_background"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/title_text_large" />
+                            android:textSize="@dimen/title_text_large"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -105,8 +109,8 @@
                 android:id="@+id/order_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="175dp"
                 android:background="@drawable/lined_background"
-                android:layout_marginTop="180dp"
                 android:contentDescription="@string/order_list"
                 app:layoutManager="LinearLayoutManager" />
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,17 +15,18 @@
             type="com.neopix.test.orders.view.callback.OrderClickCallback" />
     </data>
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="84dp"
         android:layout_marginStart="@dimen/item_horizontal_margin"
         android:layout_marginEnd="@dimen/item_horizontal_margin"
         android:background="@drawable/amount_border"
         android:backgroundTint="@color/cardview_light_background"
         android:onClick="@{() ->  callback.onClick(order)}"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:cardElevation="0dp"
-        app:cardUseCompatPadding="true">
+        card_view:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,46 +35,53 @@
 
             <ImageView
                 android:id="@+id/order_logo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="44dp" />
 
             <LinearLayout
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/item_horizontal_margin"
                 android:layout_marginEnd="@dimen/item_horizontal_margin"
+                android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:padding="@dimen/item_horizontal_margin">
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="match_parent"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:padding="3dp"
+                    android:layout_marginTop="17dp"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:text="@{String.format(@string/languages, order.venue.name)}"
                     android:textColor="@color/item_dark_background"
-                    android:textSize="@dimen/dialog_text" />
+                    android:textSize="@dimen/dialog_text"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/ic_orders_calendar"/>
-                <TextView
-                    android:id="@+id/orderDate"
-                    android:layout_width="wrap_content"
-                    android:padding="3dp"
-                    android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/date, order.orderedAt).substring(0, 10)}"
-                    android:textSize="@dimen/order_text" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/ic_orders_calendar" />
+
+                    <TextView
+                        android:id="@+id/orderDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/neopix_font_small"
+                        android:text="@{String.format(@string/date, order.orderedAt).substring(0, 10)}"
+                        android:textSize="@dimen/order_text" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -80,35 +89,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/item_horizontal_margin"
-                android:layout_marginEnd="@dimen/item_horizontal_margin"
-                android:orientation="vertical"
-                android:padding="@dimen/item_horizontal_margin">
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="@dimen/item_End_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:padding="3dp"
-                    android:textStyle="bold"
                     android:text="@{String.format(@string/amount, order.amount)}"
                     android:textColor="@color/item_dark_background"
-                    android:textSize="@dimen/dialog_text" />
+                    android:textSize="@dimen/dialog_text"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/item_border"
-                    android:textAlignment="textEnd"
-                    android:padding="3dp"
                     android:layout_gravity="end"
+                    android:background="@drawable/item_border"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:text="@{String.format(@string/date, order.status)}"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/list_item_color"
-                    android:textSize="@dimen/title_text" />
+                    android:textSize="@dimen/status_text" />
 
             </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/item_light_background">
+            <View
+                android:layout_width="3dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="20dp"
+                android:background="@color/item_border_color" />
+        </LinearLayout>
+
+
+
     </androidx.cardview.widget.CardView>
+
+
 </layout>

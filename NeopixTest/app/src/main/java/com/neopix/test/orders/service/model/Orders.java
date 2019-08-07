@@ -7,4 +7,7 @@ import java.util.List;
 public class Orders {
   @SerializedName("data")
   public List<Order> data;
+
+  @SerializedName("meta")
+  public Meta meta;
 }

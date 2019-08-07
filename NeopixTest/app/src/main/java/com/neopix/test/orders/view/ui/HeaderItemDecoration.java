@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
@@ -13,7 +12,7 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
     private HeaderInterface mListener;
     private int mStickyHeaderHeight;
 
-    public HeaderItemDecoration(@NonNull HeaderInterface listener) {
+    public HeaderItemDecoration(HeaderInterface listener) {
         mListener = listener;
     }
 
@@ -32,6 +31,7 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
 
         int headerPos = mListener.getHeaderPositionForItem(topChildPosition);
         View currentHeader = getHeaderViewForItem(headerPos, parent);
+
         fixLayoutSize(parent, currentHeader);
         int contactPoint = currentHeader.getBottom();
         View childInContact = getChildInContact(parent, contactPoint, headerPos);
@@ -71,7 +71,6 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
             int heightTolerance = 0;
             View child = parent.getChildAt(i);
 
-            //measure height tolerance with child if child is another header
             if (currentHeaderPos != i) {
                 boolean isChildHeader = mListener.isHeader(parent.getChildAdapterPosition(child));
                 if (isChildHeader) {
@@ -79,7 +78,6 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
                 }
             }
 
-            //add heightTolerance if child top be in display area
             int childBottomPosition;
             if (child.getTop() > 0) {
                 childBottomPosition = child.getBottom() + heightTolerance;
@@ -89,7 +87,6 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
 
             if (childBottomPosition > contactPoint) {
                 if (child.getTop() <= contactPoint) {
-                    // This child overlaps the contactPoint
                     childInContact = child;
                     break;
                 }
@@ -99,17 +96,10 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
     }
 
 
-    /**
-     * Properly measures and layouts the top sticky header.
-     * @param parent ViewGroup: RecyclerView in this case.
-     */
     private void fixLayoutSize(ViewGroup parent, View view) {
-
-        // Specs for parent (RecyclerView)
         int widthSpec = View.MeasureSpec.makeMeasureSpec(parent.getWidth(), View.MeasureSpec.EXACTLY);
         int heightSpec = View.MeasureSpec.makeMeasureSpec(parent.getHeight(), View.MeasureSpec.UNSPECIFIED);
 
-        // Specs for children (headers)
         int childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec, parent.getPaddingLeft() + parent.getPaddingRight(), view.getLayoutParams().width);
         int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec, parent.getPaddingTop() + parent.getPaddingBottom(), view.getLayoutParams().height);
 

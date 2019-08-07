@@ -6,6 +6,8 @@ import android.view.View;
 import com.neopix.test.orders.R;
 import com.neopix.test.orders.service.model.Order;
 import com.neopix.test.orders.service.model.OrderDetails;
+import com.neopix.test.orders.service.model.OrderedProducts;
+import com.neopix.test.orders.service.model.Venue;
 
 import javax.inject.Inject;
 
@@ -13,29 +15,44 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector, OrderFragment.DisplayVenue, OrderFragment.DisplayOrderedProducts {
 
-  public OrderDetails order = new OrderDetails();
+  public OrderDetails orderDetails = new OrderDetails();
   public OnOrderDataReceivedListener mOrderDataListener;
+  public Venue venue;
+  public ArrayList<OrderedProducts> orderedProducts;
 
-    public void showBottomFragment(View view) {
-      FragmentBottomDialog bottomSheetDialog = FragmentBottomDialog.getInstance();
-      bottomSheetDialog.show(getSupportFragmentManager(), "Custom Bottom Sheet");
-    }
-
-    public void closeDetailsFragment(View view) {
-      onBackPressed();
-    }
-
-    public interface OnOrderDataReceivedListener {
-    void onDataReceived(OrderDetails order);
+  public void showBottomFragment(View view) {
+    FragmentBottomDialog bottomSheetDialog = FragmentBottomDialog.getInstance();
+    bottomSheetDialog.displayReceivedData(venue);
+    bottomSheetDialog.show(getSupportFragmentManager(), "Bottom Sheet");
   }
 
-  public void setOrderDataListener(OnOrderDataReceivedListener listener) {
-    this.mOrderDataListener = listener;
+  public void closeDetailsFragment(View view) {
+    onBackPressed();
+  }
+
+  @Override
+  public void sendVenue(Venue venue) {
+    this.venue = venue;
+    FragmentBottomDialog fragmentBottomDialog = new FragmentBottomDialog();
+    fragmentBottomDialog.displayReceivedData(venue);
+  }
+
+  @Override
+  public void sendOrderedProducts(ArrayList<OrderedProducts> orderedProducts) {
+    this.orderedProducts = orderedProducts;
+    IncludedProductsFragment includedProductsFragment = new IncludedProductsFragment(orderedProducts);
+    includedProductsFragment.displayReceivedData(orderedProducts);
+  }
+
+  public interface OnOrderDataReceivedListener {
+    void onDataReceived(OrderDetails order);
   }
 
   @Inject
@@ -46,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    // Add order list fragment if this is first creation
+    // Add orderDetails list fragment if this is first creation
     if (savedInstanceState == null) {
       OrderListFragment fragment = new OrderListFragment();
 
@@ -55,18 +72,19 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     }
   }
 
-   // Shows the order detail fragment
+  // Shows the orderDetails detail fragment
   public void show(Order order) {
-    this.order.data = order;
+    this.orderDetails.data = order;
+
     OrderFragment orderFragment = OrderFragment.forOrder(order.id);
 
     getSupportFragmentManager()
       .beginTransaction()
-      .addToBackStack("order")
+      .addToBackStack("orderDetails")
       .setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up)
       .addToBackStack(null)
       .replace(R.id.fragment_container,
-              orderFragment, null).commit();
+        orderFragment, null).commit();
   }
 
   @Override
