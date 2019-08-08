@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
 
-    <variable
-        name="venue"
-        type="com.neopix.test.orders.service.model.Venue" />
+        <variable
+            name="venue"
+            type="com.neopix.test.orders.service.model.Venue" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -22,6 +23,7 @@
                 android:id="@+id/button_close"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:onClick="closeBottomFragment"
                 android:background="@drawable/ic_close_gray"
                 android:padding="@dimen/item_horizontal_margin" />
 
@@ -30,6 +32,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:fontFamily="@font/neopix_font"
                 android:padding="@dimen/item_horizontal_margin"
                 android:text="@string/venue_info"
                 android:textColor="@color/item_dark_background"
@@ -48,20 +51,22 @@
                     android:background="@drawable/ic_primary_number" />
 
                 <TextView
+                    android:id="@+id/venue_first_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:padding="5dp"
-                    android:id="@+id/venue_first_name"
                     android:textColor="@color/item_dark_background"
                     android:textSize="@dimen/dialog_text"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/venue_first_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/venue_first_number"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:padding="5dp"
                     android:textSize="@dimen/dialog_text" />
             </LinearLayout>
@@ -83,20 +88,22 @@
                     android:background="@drawable/ic_secondary_number" />
 
                 <TextView
+                    android:id="@+id/venue_second_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:padding="5dp"
-                    android:id="@+id/venue_second_name"
                     android:textColor="@color/item_dark_background"
                     android:textSize="@dimen/dialog_text"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/venue_second_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/venue_second_number"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:padding="5dp"
                     android:textSize="@dimen/dialog_text" />
             </LinearLayout>
@@ -118,11 +125,12 @@
                     android:background="@drawable/ic_pin" />
 
                 <TextView
+                    android:id="@+id/venue_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/neopix_font_medium"
                     android:padding="5dp"
-                    android:id="@+id/venue_address"
                     android:textSize="@dimen/dialog_text" />
             </LinearLayout>
 

@@ -118,7 +118,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/accepted"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
                     android:onClick="showBottomFragment"
                     android:text="@{String.format(@string/date, orderViewModel.order.status).toUpperCase().replace('_',' ')}"
                     android:textColor="@color/list_item_color"
@@ -129,8 +130,9 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="4"
+                    android:layout_marginEnd="10dp"
                     android:background="@color/list_item_color" />
 
             </LinearLayout>
@@ -291,10 +293,6 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:textColor="@color/details_fragment_light">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/item_date_header" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

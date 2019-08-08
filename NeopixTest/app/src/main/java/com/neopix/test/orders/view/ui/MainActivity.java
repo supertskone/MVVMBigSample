@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     includedProductsFragment.displayReceivedData(orderedProducts);
   }
 
+  public void closeBottomFragment(View view) {
+    view.getRootView().setVisibility(View.GONE);
+  }
+
   public interface OnOrderDataReceivedListener {
     void onDataReceived(OrderDetails order);
   }

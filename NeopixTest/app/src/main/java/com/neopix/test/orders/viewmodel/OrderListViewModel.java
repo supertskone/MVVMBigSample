@@ -19,19 +19,6 @@ import com.neopix.test.orders.service.repository.OrderRepository;
 import javax.inject.Inject;
 
 public class OrderListViewModel extends AndroidViewModel {
-    /*
-    private final LiveData<Orders> orderListObservable;
-
-    @Inject
-    public OrderListViewModel(@NonNull OrderRepository orderRepository, @NonNull Application application) {
-        super(application);
-
-        orderListObservable = orderRepository.getOrderList();
-    }
-
-    public LiveData<Orders> getOrderListObservable() {
-        return orderListObservable;
-        */
 
   public LiveData<PagedList<Order>> itemPagedList;
   public LiveData<ItemKeyedDataSource<Integer, Order>> liveDataSource;

@@ -22,7 +22,7 @@
         android:layout_marginStart="@dimen/item_horizontal_margin"
         android:layout_marginEnd="@dimen/item_horizontal_margin"
         android:background="@drawable/amount_border"
-        android:backgroundTint="@color/cardview_light_background"
+        android:backgroundTint="@color/item_light_background"
         android:onClick="@{() ->  callback.onClick(order)}"
         android:orientation="vertical"
         app:cardElevation="0dp"
@@ -31,6 +31,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bottom_dialog_background"
             android:orientation="horizontal">
 
             <ImageView
@@ -38,8 +40,8 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="42dp"
                 android:layout_marginBottom="44dp" />
 
             <LinearLayout
@@ -47,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/item_horizontal_margin"
-                android:layout_marginEnd="@dimen/item_horizontal_margin"
+                android:layout_marginEnd="5dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:padding="@dimen/item_horizontal_margin">
@@ -56,7 +58,6 @@
                     android:id="@+id/title"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
                     android:fontFamily="@font/neopix_font_medium"
                     android:text="@{String.format(@string/languages, order.venue.name)}"
                     android:textColor="@color/item_dark_background"
@@ -66,12 +67,11 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/ic_orders_calendar" />
 
@@ -79,6 +79,7 @@
                         android:id="@+id/orderDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="1dp"
                         android:fontFamily="@font/neopix_font_small"
                         android:text="@{String.format(@string/date, order.orderedAt).substring(0, 10)}"
                         android:textSize="@dimen/order_text" />
@@ -90,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="1dp"
-                android:layout_marginEnd="@dimen/item_End_margin"
+                android:layout_marginEnd="7dp"
                 android:orientation="vertical">
 
                 <TextView

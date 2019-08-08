@@ -21,28 +21,29 @@ import retrofit2.Response;
 
 @Singleton
 public class OrderRepository {
-    public static final String ERROR = "ERROR";
-    private NeopixService neopixService;
+  public static final String ERROR = "ERROR";
+  public NeopixService neopixService;
+  public MutableLiveData<OrderDetails> data;
 
-    @Inject
-    public OrderRepository(NeopixService neopixService) {
-        this.neopixService = neopixService;
-    }
+  @Inject
+  public OrderRepository(NeopixService neopixService) {
+    this.neopixService = neopixService;
+  }
 
-    public LiveData<OrderDetails> getOrderDetails(int orderId) {
-        final MutableLiveData<OrderDetails> data = new MutableLiveData<>();
+  public LiveData<OrderDetails> getOrderDetails(int orderId) {
+    data = new MutableLiveData<>();
 
-        neopixService.getOrderDetails(String.valueOf(orderId)).enqueue(new Callback<OrderDetails>() {
-            @Override
-            public void onResponse(Call<OrderDetails> call, Response<OrderDetails> response) {
-                data.setValue(response.body());
-            }
+      RetrofitClient.getInstance().getApi().getOrderDetails(String.valueOf(orderId)).enqueue(new Callback<OrderDetails>() {
+        @Override
+        public void onResponse(Call<OrderDetails> call, Response<OrderDetails> response) {
+          data.setValue(response.body());
+        }
 
-            @Override
-            public void onFailure(Call<OrderDetails> call, Throwable t) {
-                data.setValue(null);
-            }
-        });
-        return data;
-    }
+        @Override
+        public void onFailure(Call<OrderDetails> call, Throwable t) {
+          data.setValue(null);
+        }
+      });
+    return data;
+  }
 }

@@ -14,7 +14,6 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -23,14 +22,20 @@ import com.neopix.test.orders.R;
 import com.neopix.test.orders.databinding.FragmentOrderDetailsBinding;
 import com.neopix.test.orders.di.Injectable;
 import com.neopix.test.orders.service.model.Notes;
+import com.neopix.test.orders.service.model.OrderDetails;
 import com.neopix.test.orders.service.model.OrderedProducts;
 import com.neopix.test.orders.service.model.Venue;
 import com.neopix.test.orders.viewmodel.OrderViewModel;
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+
+import static com.neopix.test.orders.service.model.StatusType.ACCEPTED;
+import static com.neopix.test.orders.service.model.StatusType.PARTIALLYACCEPTED;
+import static com.neopix.test.orders.service.model.StatusType.PENDING;
 
 
 public class OrderFragment extends Fragment implements Injectable {
@@ -55,6 +60,7 @@ public class OrderFragment extends Fragment implements Injectable {
 
     tabLayout = binding.tablayout;
     viewPager = binding.viewPager;
+
 
     return binding.getRoot();
   }
@@ -123,16 +129,63 @@ public class OrderFragment extends Fragment implements Injectable {
         pageAdapter.setNotes(order.data.notes);
         displayOrderedProducts.sendOrderedProducts(order.data.orderedProducts);
         displayVenue.sendVenue(order.data.venue);
+
+        loadImage(order);
+        setColorByStatus(order);
+        setVenueName(order);
       }
     });
   }
 
+  private void setVenueName(OrderDetails order) {
+    String venueName = order.data.venue.name;
+    if (venueName.length() > 14) {
+      order.data.venue.name = venueName.substring(0, 14);
+    }
+  }
+
+  private void setColorByStatus(OrderDetails order) {
+    switch (order.data.status.toUpperCase().replace('_', ' ')) {
+      case PARTIALLYACCEPTED:
+        binding.status.setBackgroundResource(R.drawable.partially_accepted);
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getContext(), R.color.colorPartiallyAccepted));
+        break;
+      case ACCEPTED:
+        binding.status.setBackgroundResource(R.drawable.accepted);
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getContext(), R.color.colorAccepted));
+        break;
+      case PENDING:
+        binding.status.setBackgroundResource(R.drawable.pending);
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getContext(), R.color.colorPending));
+        break;
+      default:
+        binding.status.setBackgroundResource(R.drawable.declined);
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getContext(), R.color.colorDeclined));
+        break;
+    }
+  }
+
+  private void loadImage(OrderDetails order) {
+    Picasso picasso = new Picasso.Builder(getContext())
+      .listener((picasso1, uri, exception) -> exception.getMessage())
+      .build();
+    picasso.load(order.data.venue.logo)
+      .fit()
+      .error(R.drawable.ic_orders_total_ammount)
+      .into(binding.orderLogo);
+  }
+
   public static OrderFragment forOrder(int orderID) {
     OrderFragment fragment = new OrderFragment();
-    Bundle args = new Bundle();
+    try {
+      Bundle args = new Bundle();
 
-    args.putInt(KEY_ORDER_ID, orderID);
-    fragment.setArguments(args);
+      args.putInt(KEY_ORDER_ID, orderID);
+      fragment.setArguments(args);
+    } catch (Exception e) {
+      e.getMessage();
+      e.getMessage();
+    }
 
     return fragment;
   }

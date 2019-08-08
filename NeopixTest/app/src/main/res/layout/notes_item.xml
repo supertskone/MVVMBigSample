@@ -24,7 +24,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginStart="@dimen/item_horizontal_margin"
                 android:layout_marginEnd="@dimen/item_horizontal_margin"
                 android:orientation="horizontal"
@@ -32,11 +32,10 @@
 
                 <ImageView
                     android:id="@+id/ordered_product_logo"
-                    android:layout_width="37dp"
-                    android:layout_height="37dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/bottoms_up" />
 
 
@@ -46,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/neopix_font"
                     android:text="@string/bottoms_up"
                     android:textColor="@color/item_dark_background"
@@ -56,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/neopix_font_medium"
                     android:gravity="center_vertical|end"
                     android:text="@{String.format(@string/languages, notes.date).substring(0, 10).toUpperCase()}"
@@ -65,21 +66,22 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="@dimen/item_horizontal_margin"
                 android:layout_marginEnd="@dimen/item_horizontal_margin"
-                android:orientation="horizontal"
-                android:padding="@dimen/item_horizontal_margin">
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/neopix_font_medium"
+                    android:layout_marginStart="5dp"
+                    android:gravity="top"
                     android:text="@{String.format(@string/languages, notes.message)}"
                     android:textColor="@color/item_dark_background"
-                    android:textSize="@dimen/dialog_text" />
+                    android:textSize="@dimen/item_title_text" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

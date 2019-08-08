@@ -8,7 +8,7 @@
     <string name="ordered_products_list">Ordered Products List</string>
     <string name="languages"> %s</string>
     <string name="date">%s</string>
-    <string name="amount">$ %s</string>
+    <string name="amount">$%s</string>
     <string name="openIssues">Open Issues: %s</string>
     <string name="created_at">Created At: %s</string>
     <string name="updated_at">Updated At: %s</string>

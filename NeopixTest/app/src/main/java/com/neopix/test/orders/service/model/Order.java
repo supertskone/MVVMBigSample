@@ -53,6 +53,11 @@ public class Order implements Serializable {
     this.orderedAt = orderedAt;
   }
 
+  public Order(int id, Date orderedAt) {
+    this.id = id;
+    this.orderedAt = orderedAt;
+  }
+
   public Integer getType() {
     return type;
   }
