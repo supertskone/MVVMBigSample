@@ -18,7 +18,7 @@ import com.neopix.test.orders.view.adapter.OrderedProductsAdapter;
 
 import java.util.ArrayList;
 
-public class IncludedProductsFragment extends Fragment implements OrderFragment.DisplayOrderedProducts {
+public class IncludedProductsFragment extends Fragment {
   public MutableLiveData<ArrayList<OrderedProducts>> orderedProducts = new MutableLiveData<>();
   public FragmentIncludedProductsBinding binding;
   public OrderedProductsAdapter orderedProductsAdapter;
@@ -53,10 +53,4 @@ public class IncludedProductsFragment extends Fragment implements OrderFragment.
   protected void displayReceivedData(ArrayList<OrderedProducts> orderedProducts) {
     this.orderedProducts.setValue(orderedProducts);
   }
-
-  @Override
-  public void sendOrderedProducts(ArrayList<OrderedProducts> orderedProducts) {
-    this.orderedProducts.setValue(orderedProducts);
-  }
-
 }

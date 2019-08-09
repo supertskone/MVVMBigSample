@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector, OrderFragment.DisplayVenue, OrderFragment.DisplayOrderedProducts {
+public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector, OrderFragment.DisplayVenue {
 
   public OrderDetails orderDetails = new OrderDetails();
   public OnOrderDataReceivedListener mOrderDataListener;
@@ -42,13 +42,6 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     this.venue = venue;
     FragmentBottomDialog fragmentBottomDialog = new FragmentBottomDialog();
     fragmentBottomDialog.displayReceivedData(venue);
-  }
-
-  @Override
-  public void sendOrderedProducts(ArrayList<OrderedProducts> orderedProducts) {
-    this.orderedProducts = orderedProducts;
-    IncludedProductsFragment includedProductsFragment = new IncludedProductsFragment(orderedProducts);
-    includedProductsFragment.displayReceivedData(orderedProducts);
   }
 
   public void closeBottomFragment(View view) {

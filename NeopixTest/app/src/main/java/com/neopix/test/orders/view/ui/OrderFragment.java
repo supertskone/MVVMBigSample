@@ -42,7 +42,6 @@ public class OrderFragment extends Fragment implements Injectable {
   private static final String KEY_ORDER_ID = "order_id";
   private FragmentOrderDetailsBinding binding;
   private DisplayVenue displayVenue;
-  private DisplayOrderedProducts displayOrderedProducts;
   private TabLayout tabLayout;
   private ViewPager viewPager;
   private PageAdapter pageAdapter;
@@ -106,7 +105,6 @@ public class OrderFragment extends Fragment implements Injectable {
     super.onAttach(context);
     try {
       displayVenue = (DisplayVenue) getActivity();
-      displayOrderedProducts = (DisplayOrderedProducts) getActivity();
     } catch (ClassCastException e) {
       throw new ClassCastException("Error in retrieving data. Please try again");
     }
@@ -127,7 +125,6 @@ public class OrderFragment extends Fragment implements Injectable {
         viewModel.setOrder(order.data);
         pageAdapter.setOrderedProducts(order.data.orderedProducts);
         pageAdapter.setNotes(order.data.notes);
-        displayOrderedProducts.sendOrderedProducts(order.data.orderedProducts);
         displayVenue.sendVenue(order.data.venue);
 
         setColorByStatus(order);
@@ -181,13 +178,5 @@ public class OrderFragment extends Fragment implements Injectable {
 
   interface DisplayVenue {
     void sendVenue(Venue venue);
-  }
-
-  interface DisplayOrderedProducts {
-    void sendOrderedProducts(ArrayList<OrderedProducts> orderedProducts);
-  }
-
-  interface DisplayNotes {
-    void sendNotes(ArrayList<Notes> notes);
   }
 }
