@@ -1,7 +1,7 @@
 package com.neopix.test.orders.di;
 
 import com.neopix.test.orders.viewmodel.OrderListViewModel;
-import com.neopix.test.orders.viewmodel.OrderViewModel;
+import com.neopix.test.orders.viewmodel.OrderDetailViewModel;
 import com.neopix.test.orders.viewmodel.OrderViewModelFactory;
 
 import dagger.Subcomponent;
@@ -18,5 +18,5 @@ public interface ViewModelSubComponent {
     }
 
     OrderListViewModel orderListViewModel();
-    OrderViewModel orderViewModel();
+    OrderDetailViewModel orderViewModel();
 }

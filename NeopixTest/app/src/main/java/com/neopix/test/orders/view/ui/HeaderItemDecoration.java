@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
 
     private HeaderInterface mListener;
-    private int mStickyHeaderHeight;
+    private int headerHeight;
 
     public HeaderItemDecoration(HeaderInterface listener) {
         mListener = listener;
@@ -74,7 +74,7 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
             if (currentHeaderPos != i) {
                 boolean isChildHeader = mListener.isHeader(parent.getChildAdapterPosition(child));
                 if (isChildHeader) {
-                    heightTolerance = mStickyHeaderHeight - child.getHeight();
+                    heightTolerance = headerHeight - child.getHeight();
                 }
             }
 
@@ -105,7 +105,7 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
 
         view.measure(childWidthSpec, childHeightSpec);
 
-        view.layout(0, 0, view.getMeasuredWidth(), mStickyHeaderHeight = view.getMeasuredHeight());
+        view.layout(0, 0, view.getMeasuredWidth(), headerHeight = view.getMeasuredHeight());
     }
 
     public interface HeaderInterface {

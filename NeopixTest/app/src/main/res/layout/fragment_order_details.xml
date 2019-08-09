@@ -10,8 +10,8 @@
             type="boolean" />
 
         <variable
-            name="orderViewModel"
-            type="com.neopix.test.orders.viewmodel.OrderViewModel" />
+            name="orderDetailViewModel"
+            type="com.neopix.test.orders.viewmodel.OrderDetailViewModel" />
 
         <variable
             name="order"
@@ -60,6 +60,7 @@
                         android:id="@+id/order_logo"
                         android:layout_width="37dp"
                         android:layout_height="37dp"
+                        app:imageUrl="@{orderDetailViewModel.order.venue.logo}"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/ic_orders_total_ammount" />
 
@@ -73,7 +74,7 @@
                         android:fontFamily="@font/neopix_font"
                         android:gravity="center"
                         android:onClick="showBottomFragment"
-                        android:text="@{String.format(@string/date, orderViewModel.order.venue.name)}"
+                        android:text="@{String.format(@string/date, orderDetailViewModel.order.venue.name)}"
                         android:textColor="@color/list_item_color"
                         android:textSize="@dimen/details_title"
                         android:textStyle="bold" />
@@ -121,7 +122,7 @@
                     android:gravity="center_horizontal"
                     android:layout_weight="1"
                     android:onClick="showBottomFragment"
-                    android:text="@{String.format(@string/date, orderViewModel.order.status).toUpperCase().replace('_',' ')}"
+                    android:text="@{String.format(@string/date, orderDetailViewModel.order.status).toUpperCase().replace('_',' ')}"
                     android:textColor="@color/list_item_color"
                     android:textSize="@dimen/order_text"
                     android:textStyle="bold" />
@@ -173,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/neopix_font_medium"
                     android:paddingLeft="8dp"
-                    android:text="@{String.format(@string/date, orderViewModel.order.orderNumber)}"
+                    android:text="@{String.format(@string/date, orderDetailViewModel.order.orderNumber)}"
                     android:textColor="@color/list_item_color"
                     android:textSize="@dimen/order_header2"
                     android:textStyle="bold" />
@@ -201,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/neopix_font_medium"
-                    android:text="@{String.format(@string/date, orderViewModel.order.orderedAt).substring(0, 4).toUpperCase()}"
+                    android:text="@{String.format(@string/date, orderDetailViewModel.order.orderedAt).substring(0, 4).toUpperCase()}"
                     android:textColor="@color/list_item_color"
                     android:textSize="@dimen/order_header2"
                     android:textStyle="bold" />
@@ -231,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/neopix_font_medium"
                     android:paddingEnd="8dp"
-                    android:text="@{String.format(@string/date, orderViewModel.order.acceptedAt).substring(0, 4).toUpperCase()}"
+                    android:text="@{String.format(@string/date, orderDetailViewModel.order.acceptedAt).substring(0, 4).toUpperCase()}"
                     android:textColor="@color/list_item_color"
                     android:textSize="@dimen/order_header2"
                     android:textStyle="bold" />

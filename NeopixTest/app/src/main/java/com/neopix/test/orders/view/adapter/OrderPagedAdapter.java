@@ -121,8 +121,6 @@ public class OrderPagedAdapter extends PagedListAdapter<Order, RecyclerView.View
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-    int position1 = position;
-    //viewHolder = null;
     if (getItem(position).type == ItemType.Header) {
       HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
 
@@ -137,13 +135,9 @@ public class OrderPagedAdapter extends PagedListAdapter<Order, RecyclerView.View
         order.venue.name = order.venue.name.substring(0, 13);
       }
       updateStatus(orderViewHolder, order);
-
-      loadImage(orderViewHolder, order);
-
       loadDate(orderViewHolder, order);
 
       orderViewHolder.binding.setOrder(order);
-
       orderViewHolder.binding.executePendingBindings();
     }
   }
@@ -177,16 +171,6 @@ public class OrderPagedAdapter extends PagedListAdapter<Order, RecyclerView.View
         orderViewHolder.binding.status.setBackgroundResource(R.drawable.declined);
         break;
     }
-  }
-
-  private void loadImage(OrderViewHolder orderViewHolder, Order order) {
-    Picasso picasso = new Picasso.Builder(context)
-      .listener((picasso1, uri, exception) -> exception.getMessage())
-      .build();
-    picasso.load(order.venue.logo)
-      .fit()
-      .error(R.drawable.ic_orders_total_ammount)
-      .into(orderViewHolder.binding.orderLogo);
   }
 
   @Override

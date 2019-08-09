@@ -42,7 +42,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="42dp"
-                android:layout_marginBottom="44dp" />
+                android:layout_marginBottom="44dp"
+                app:logoUrl="@{order.venue.logo}" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -79,8 +80,8 @@
                         android:id="@+id/orderDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="1dp"
                         android:fontFamily="@font/neopix_font_small"
+                        android:padding="1dp"
                         android:text="@{String.format(@string/date, order.orderedAt).substring(0, 10)}"
                         android:textSize="@dimen/order_text" />
                 </LinearLayout>
@@ -125,13 +126,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/item_light_background">
+
             <View
                 android:layout_width="3dp"
                 android:layout_height="10dp"
                 android:layout_marginStart="20dp"
                 android:background="@color/item_border_color" />
         </LinearLayout>
-
 
 
     </androidx.cardview.widget.CardView>

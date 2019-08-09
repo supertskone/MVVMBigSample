@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.neopix.test.orders.R;
 import com.neopix.test.orders.databinding.FragmentOrderDetailsBinding;
 import com.neopix.test.orders.di.Injectable;
@@ -25,9 +26,8 @@ import com.neopix.test.orders.service.model.Notes;
 import com.neopix.test.orders.service.model.OrderDetails;
 import com.neopix.test.orders.service.model.OrderedProducts;
 import com.neopix.test.orders.service.model.Venue;
-import com.neopix.test.orders.viewmodel.OrderViewModel;
-import com.google.android.material.tabs.TabLayout;
-import com.squareup.picasso.Picasso;
+import com.neopix.test.orders.view.adapter.PageAdapter;
+import com.neopix.test.orders.viewmodel.OrderDetailViewModel;
 
 import java.util.ArrayList;
 
@@ -70,12 +70,12 @@ public class OrderFragment extends Fragment implements Injectable {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    OrderViewModel orderViewModel = ViewModelProviders.of(this, viewModelFactory)
-      .get(OrderViewModel.class);
+    OrderDetailViewModel orderDetailViewModel = ViewModelProviders.of(this, viewModelFactory)
+      .get(OrderDetailViewModel.class);
 
-    orderViewModel.setOrderID(getArguments().getInt(KEY_ORDER_ID));
+    orderDetailViewModel.setOrderID(getArguments().getInt(KEY_ORDER_ID));
 
-    binding.setOrderViewModel(orderViewModel);
+    binding.setOrderDetailViewModel(orderDetailViewModel);
     binding.setIsLoading(true);
     pageAdapter = new PageAdapter(getChildFragmentManager(), tabLayout.getTabCount());
     viewPager.setAdapter(pageAdapter);
@@ -98,7 +98,7 @@ public class OrderFragment extends Fragment implements Injectable {
     viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     changeStatusBarColor();
 
-    observeViewModel(orderViewModel);
+    observeViewModel(orderDetailViewModel);
   }
 
   @Override
@@ -119,7 +119,7 @@ public class OrderFragment extends Fragment implements Injectable {
     window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.item_details_background));
   }
 
-  private void observeViewModel(final OrderViewModel viewModel) {
+  private void observeViewModel(final OrderDetailViewModel viewModel) {
     // Observe orderDetails data
     viewModel.getObservableOrder().observe(this, order -> {
       if (order != null) {
@@ -130,7 +130,6 @@ public class OrderFragment extends Fragment implements Injectable {
         displayOrderedProducts.sendOrderedProducts(order.data.orderedProducts);
         displayVenue.sendVenue(order.data.venue);
 
-        loadImage(order);
         setColorByStatus(order);
         setVenueName(order);
       }
@@ -163,16 +162,6 @@ public class OrderFragment extends Fragment implements Injectable {
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getContext(), R.color.colorDeclined));
         break;
     }
-  }
-
-  private void loadImage(OrderDetails order) {
-    Picasso picasso = new Picasso.Builder(getContext())
-      .listener((picasso1, uri, exception) -> exception.getMessage())
-      .build();
-    picasso.load(order.data.venue.logo)
-      .fit()
-      .error(R.drawable.ic_orders_total_ammount)
-      .into(binding.orderLogo);
   }
 
   public static OrderFragment forOrder(int orderID) {

@@ -27,4 +27,10 @@ public class Venue {
   @SerializedName("secondaryContactPhone")
   public String secondaryContactPhone;
 
+  public Venue(int id, String name, String logo, String address) {
+    this.id = id;
+    this.name = name;
+    this.logo = logo;
+    this.address = address;
+  }
 }

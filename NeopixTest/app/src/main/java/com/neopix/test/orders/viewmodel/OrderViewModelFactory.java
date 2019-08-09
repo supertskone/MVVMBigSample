@@ -20,8 +20,8 @@ public class OrderViewModelFactory implements ViewModelProvider.Factory {
     public OrderViewModelFactory(ViewModelSubComponent viewModelSubComponent) {
         creators = new ArrayMap<>();
 
-        // View models cannot be injected directly because they won't be bound to the owner's view model scope.
-        creators.put(OrderViewModel.class, viewModelSubComponent::orderViewModel);
+        // View models cannot be injected directly
+        creators.put(OrderDetailViewModel.class, viewModelSubComponent::orderViewModel);
         creators.put(OrderListViewModel.class, viewModelSubComponent::orderListViewModel);
     }
 

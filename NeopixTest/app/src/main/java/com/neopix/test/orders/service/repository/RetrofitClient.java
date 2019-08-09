@@ -1,22 +1,15 @@
 package com.neopix.test.orders.service.repository;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.neopix.test.orders.di.ViewModelSubComponent;
-import com.neopix.test.orders.viewmodel.OrderViewModelFactory;
 
 import java.lang.reflect.Type;
 import java.util.Date;
 
-import javax.inject.Singleton;
-
-import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

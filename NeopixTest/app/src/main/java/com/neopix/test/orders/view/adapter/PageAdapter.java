@@ -1,4 +1,4 @@
-package com.neopix.test.orders.view.ui;
+package com.neopix.test.orders.view.adapter;
 
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.neopix.test.orders.service.model.Notes;
 import com.neopix.test.orders.service.model.OrderedProducts;
+import com.neopix.test.orders.view.ui.IncludedProductsFragment;
+import com.neopix.test.orders.view.ui.NotesFragment;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class PageAdapter extends FragmentPagerAdapter {
   private MutableLiveData<ArrayList<Notes>> notes = new MutableLiveData<>();
 
 
-  PageAdapter(FragmentManager fm, int numOfTabs) {
+  public PageAdapter(FragmentManager fm, int numOfTabs) {
     super(fm);
     this.numOfTabs = numOfTabs;
   }

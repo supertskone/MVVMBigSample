@@ -3,32 +3,20 @@ package com.neopix.test.orders.view.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.neopix.test.orders.R;
 import com.neopix.test.orders.databinding.FragmentIncludedProductsBinding;
-import com.neopix.test.orders.service.model.Order;
-import com.neopix.test.orders.service.model.OrderDetails;
 import com.neopix.test.orders.service.model.OrderedProducts;
-import com.neopix.test.orders.service.model.Venue;
-import com.neopix.test.orders.view.adapter.OrderPagedAdapter;
 import com.neopix.test.orders.view.adapter.OrderedProductsAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.widget.LinearLayout.VERTICAL;
 
 public class IncludedProductsFragment extends Fragment implements OrderFragment.DisplayOrderedProducts {
   public MutableLiveData<ArrayList<OrderedProducts>> orderedProducts = new MutableLiveData<>();

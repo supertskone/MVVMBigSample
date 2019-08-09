@@ -46,8 +46,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     Notes dataModel = notes.get(position);
     holder.binding.setNotes(dataModel);
     holder.binding.executePendingBindings();
-
-    //holder.bind(dataModel);
   }
 
   @Override
